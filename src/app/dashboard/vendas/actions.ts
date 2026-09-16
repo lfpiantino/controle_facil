@@ -1,0 +1,4 @@
+"use server";
+import {revalidatePath} from "next/cache";import {redirect} from "next/navigation";
+import {formText,friendlyError,requireStore} from "@/lib/current-store";
+export async function createSale(fd:FormData){const {supabase,store}=await requireStore();const items:Array<{product_id:string;quantity:number}>=[];for(const [key,value] of fd.entries())if(key.startsWith("qty_")&&Number(value)>0)items.push({product_id:key.slice(4),quantity:Number(value)});const {data,error}=await supabase.rpc("create_sale",{p_store_id:store.id,p_channel:formText(fd,"channel"),p_payment_method:formText(fd,"payment_method"),p_discount:Number(formText(fd,"discount")||0),p_items:items,p_notes:formText(fd,"notes")||null});if(error)redirect(`/dashboard/vendas?erro=${encodeURIComponent(friendlyError(error.message))}`);revalidatePath("/dashboard","layout");redirect(`/dashboard/vendas?sucesso=${encodeURIComponent("Venda registrada: "+String(data).slice(0,8))}`);}
