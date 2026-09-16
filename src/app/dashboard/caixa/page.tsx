@@ -1,0 +1,1 @@
+import {WalletCards} from "lucide-react";import {ModulePage} from "@/components/module-page";export default function Page(){return <ModulePage eyebrow="FINANCEIRO" title="Controle de caixa" description="Abra o turno, registre movimentos e confira o fechamento." icon={WalletCards} action="Abrir caixa"/>}

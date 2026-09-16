@@ -1,0 +1,1 @@
+import {CookingPot} from "lucide-react";import {ModulePage} from "@/components/module-page";export default function Page(){return <ModulePage eyebrow="COZINHA" title="Fila de produção" description="Acompanhe pedidos novos, em preparo e prontos." icon={CookingPot} action="Atualizar fila"/>}

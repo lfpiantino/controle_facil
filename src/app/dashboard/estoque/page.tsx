@@ -1,0 +1,1 @@
+import {Boxes} from "lucide-react";import {ModulePage} from "@/components/module-page";export default function Page(){return <ModulePage eyebrow="ESTOQUE" title="Ingredientes e insumos" description="Entradas, perdas, inventário e estoque mínimo." icon={Boxes} action="+ Novo ingrediente"/>}

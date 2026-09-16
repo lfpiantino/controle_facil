@@ -1,0 +1,1 @@
+import {BarChart3} from "lucide-react";import {ModulePage} from "@/components/module-page";export default function Page(){return <ModulePage eyebrow="GESTÃO" title="Relatórios" description="Vendas, produtos, pagamentos, estoque e diferenças de caixa." icon={BarChart3} action="Gerar relatório"/>}

@@ -1,0 +1,1 @@
+import {ShoppingCart} from "lucide-react";import {ModulePage} from "@/components/module-page";export default function Page(){return <ModulePage eyebrow="VENDAS" title="Pedidos e comandas" description="Balcão, retirada, mesas e delivery em um único fluxo." icon={ShoppingCart} action="+ Novo pedido"/>}
