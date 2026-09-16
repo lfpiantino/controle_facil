@@ -1,2 +1,2 @@
 import {redirect} from "next/navigation";import {AppShell} from "@/components/app-shell";import {createClient} from "@/lib/supabase/server";
-export default async function DashboardLayout({children}:{children:React.ReactNode}){const s=await createClient();const {data:{user}}=await s.auth.getUser();if(!user)redirect("/login");return <AppShell>{children}</AppShell>}
+export default async function DashboardLayout({children}:{children:React.ReactNode}){const s=await createClient();const {data:{user}}=await s.auth.getUser();if(!user)redirect("/login");const {data:admin}=await s.from("platform_admins").select("user_id").eq("user_id",user.id).eq("is_active",true).maybeSingle();return <AppShell isSuperAdmin={Boolean(admin)}>{children}</AppShell>}
