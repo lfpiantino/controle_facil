@@ -24,6 +24,13 @@ export function friendlyError(message: string) {
     PRODUTO_INDISPONIVEL: "Um dos produtos não está disponível.",
     EMPRESA_BLOQUEADA_INADIMPLENCIA: "A empresa está bloqueada. Regularize a assinatura.",
     ESTOQUE_NEGATIVO_NAO_PERMITIDO: "A movimentação deixaria o estoque negativo.",
+    MESA_OBRIGATORIA: "Selecione uma mesa para a comanda.",
+    ENDERECO_OBRIGATORIO: "Informe o endereço para o delivery.",
+    CLIENTE_INVALIDO: "O cliente selecionado não pertence a esta loja.",
+    MESA_INVALIDA: "A mesa selecionada não está disponível.",
+    TRANSICAO_STATUS_INVALIDA: "Esse avanço de status não é permitido.",
+    PEDIDO_FINALIZADO: "Um pedido finalizado não pode ser cancelado.",
+    CAIXA_DA_VENDA_FECHADO: "O caixa desta venda já foi fechado.",
   };
   const stock = message.match(/ESTOQUE_INSUFICIENTE:\s*(.+)/);
   if (stock) return `Estoque insuficiente: ${stock[1]}.`;

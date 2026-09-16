@@ -1,0 +1,2 @@
+"use server";import {revalidatePath} from "next/cache";import {redirect} from "next/navigation";import {formText,friendlyError,requireStore} from "@/lib/current-store";
+export async function advanceOrder(fd:FormData){const {supabase,store}=await requireStore();const {error}=await supabase.rpc("update_order_status",{p_store_id:store.id,p_order_id:formText(fd,"order_id"),p_status:formText(fd,"status")});if(error)redirect(`/dashboard/producao?erro=${encodeURIComponent(friendlyError(error.message))}`);revalidatePath("/dashboard/producao");}
