@@ -35,3 +35,19 @@ export async function toggleProduct(formData: FormData) {
   await supabase.from("products").update({is_available:!available}).eq("id",id).eq("store_id",store.id);
   revalidatePath("/dashboard/cardapio");
 }
+
+export async function createAddon(formData: FormData) {
+  const {supabase,store}=await requireStore();
+  const {error}=await supabase.from("addons").insert({store_id:store.id,name:formText(formData,"name"),price:Number(formText(formData,"price").replace(",",".")),ingredient_id:formText(formData,"ingredient_id")||null,is_available:true});
+  if(error) redirect(`/dashboard/cardapio?erro=${encodeURIComponent(friendlyError(error.message))}`);
+  revalidatePath("/dashboard/cardapio");redirect("/dashboard/cardapio?sucesso=Adicional criado.");
+}
+
+export async function linkAddon(formData: FormData) {
+  const {supabase,store}=await requireStore();const productId=formText(formData,"product_id"),addonId=formText(formData,"addon_id");
+  const [{data:product},{data:addon}]=await Promise.all([supabase.from("products").select("id").eq("id",productId).eq("store_id",store.id).maybeSingle(),supabase.from("addons").select("id").eq("id",addonId).eq("store_id",store.id).maybeSingle()]);
+  if(!product||!addon) redirect("/dashboard/cardapio?erro=Produto ou adicional inválido.");
+  const {error}=await supabase.from("product_addons").upsert({product_id:productId,addon_id:addonId});
+  if(error) redirect(`/dashboard/cardapio?erro=${encodeURIComponent(friendlyError(error.message))}`);
+  revalidatePath("/dashboard/cardapio");redirect("/dashboard/cardapio?sucesso=Adicional vinculado ao produto.");
+}

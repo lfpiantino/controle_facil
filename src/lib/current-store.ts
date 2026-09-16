@@ -31,6 +31,7 @@ export function friendlyError(message: string) {
     TRANSICAO_STATUS_INVALIDA: "Esse avanço de status não é permitido.",
     PEDIDO_FINALIZADO: "Um pedido finalizado não pode ser cancelado.",
     CAIXA_DA_VENDA_FECHADO: "O caixa desta venda já foi fechado.",
+    ADICIONAL_INDISPONIVEL: "Um adicional selecionado não está disponível para esse produto.",
   };
   const stock = message.match(/ESTOQUE_INSUFICIENTE:\s*(.+)/);
   if (stock) return `Estoque insuficiente: ${stock[1]}.`;
